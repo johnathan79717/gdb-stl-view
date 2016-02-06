@@ -47,15 +47,14 @@ define pvector
 	if $argc == 0
 		help pvector
 	else
-		set $size = $arg0._M_impl._M_finish - $arg0._M_impl._M_start
-		set $capacity = $arg0._M_impl._M_end_of_storage - $arg0._M_impl._M_start
+		set $size = $arg0.__end_ - $arg0.__begin_
 		set $size_max = $size - 1
 	end
 	if $argc == 1
 		set $i = 0
 		while $i < $size
 			printf "elem[%u]: ", $i
-			p *($arg0._M_impl._M_start + $i)
+			p *($arg0.__begin_ + $i)
 			set $i++
 		end
 	end
@@ -65,7 +64,7 @@ define pvector
 			printf "idx1, idx2 are not in acceptable range: [0..%u].\n", $size_max
 		else
 			printf "elem[%u]: ", $idx
-			p *($arg0._M_impl._M_start + $idx)
+			p *($arg0.__begin_ + $idx)
 		end
 	end
 	if $argc == 3
@@ -82,16 +81,16 @@ define pvector
 	    set $i = $start_idx
 		while $i <= $stop_idx
 			printf "elem[%u]: ", $i
-			p *($arg0._M_impl._M_start + $i)
+			p *($arg0.__begin_ + $i)
 			set $i++
 		end
 	  end
 	end
 	if $argc > 0
 		printf "Vector size = %u\n", $size
-		printf "Vector capacity = %u\n", $capacity
+                #printf "Vector capacity = %u\n", $capacity
 		printf "Element "
-		whatis $arg0._M_impl._M_start
+		whatis $arg0.__begin_
 	end
 end
 
@@ -692,3 +691,4 @@ set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
+
