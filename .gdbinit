@@ -128,7 +128,7 @@ define plist
 			end
 			if $argc == 4
 				if strcmp("$arg2","-context") == 0
-					print "elem[%u]: ", $size
+					printf "elem[%u]: ", $size
 					p (**($arg1**)($current + 1))$arg3
 				end
 			end
