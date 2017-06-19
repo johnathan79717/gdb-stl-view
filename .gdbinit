@@ -118,12 +118,18 @@ define plist
 		while $current != $head
 			if $argc == 2
 				printf "elem[%u]: ", $size
-				p *($arg1*)($current + 1)
+				p **($arg1**)($current + 1)
 			end
 			if $argc == 3
 				if $size == $arg2
 					printf "elem[%u]: ", $size
-					p *($arg1*)($current + 1)
+					p **($arg1**)($current + 1)
+				end
+			end
+			if $argc == 4
+				if strcmp("$arg2","-context") == 0
+					printf "elem[%u]: ", $size
+					p (**($arg1**)($current + 1))$arg3
 				end
 			end
 			set $current = $current._M_next
